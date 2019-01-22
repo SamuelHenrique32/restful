@@ -6,7 +6,35 @@ let server = http.createServer((req, res)=>{     //servidor criado, require e re
 
     console.log('METHOD: ', req.method);
 
-    res.end('OK');                              //finalizar
+    //dependendo da url, possui resultado diferente
+
+    switch (req.url) {
+
+        case '/':
+
+            res.statusCode = 200;                //deu certo
+            //processar como html
+            res.setHeader('Content-Type', 'text/html');
+            res.end('<h1>Olá<h1>');
+
+            break;
+
+        case '/users':
+
+            res.statusCode = 200;                //deu certo
+            //processar como json
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({
+
+                users:[{
+                    name:'Hcode',
+                    email:'contato@hcode.com.br',
+                    id:1
+                }]
+            }));
+
+            break;
+    }
 });
 
 //porta 3000
