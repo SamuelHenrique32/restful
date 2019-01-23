@@ -1,12 +1,10 @@
 const express = require('express');                     //modulo carregado
-let routesIndex = require('./routes/index');            //carrega index interno da pasta routes
-let routesUsers = require('./routes/users');
+const consign = require('consign');
 
 let app = express();
 
-//avisa que esta usando
-app.use(routesIndex);
-app.use('/users', routesUsers);                         //rotas de usuario comecam com /users
+//inclui todas as rotas no app
+consign().include('routes').into(app);
 
 //porta 3000
 app.listen(3000, '127.0.0.1', ()=>{

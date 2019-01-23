@@ -1,30 +1,27 @@
-let express = require('express');
-let routes = express.Router();
+module.exports = (app) => {
 
-//  /users
-routes.get('/', (req, res)=> {
 
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.json({                                          //express permite tirar stringfy
+    app.get('/users', (req, res)=> {
 
-        users:[{
-            name:'Hcode',
-            email:'contato@hcode.com.br',
-            id:1
-        }]
-    });
-});
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json({                                          //express permite tirar stringfy
 
-//  /users/admin
-routes.get('/admin', (req, res)=> {
-
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.json({
-        users:[]
+            users:[{
+                name:'Hcode',
+                email:'contato@hcode.com.br',
+                id:1
+            }]
+        });
     });
 
-});
+    //  /users/admin
+    app.get('/users/admin', (req, res)=> {
 
-module.exports = routes;
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json({
+            users:[]
+        });
+    });
+};
