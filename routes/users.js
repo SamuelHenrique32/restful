@@ -1,7 +1,6 @@
-module.exports = (app) => {
+module.exports = app => {
 
-
-    app.get('/users', (req, res)=> {
+    app.get('/users', (req, res) => {
 
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -16,12 +15,9 @@ module.exports = (app) => {
     });
 
     //  /users/admin
-    app.get('/users/admin', (req, res)=> {
+    app.post('/users', (req, res) => {
 
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json({
-            users:[]
-        });
+        //exibir campos
+        res.json(req.body);
     });
 };
