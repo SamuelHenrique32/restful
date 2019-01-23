@@ -1,3 +1,10 @@
+let NeDB = require('nedb');
+let db = new NeDB({             //nome, se nao existir cria
+
+    filename:'users.db',
+    autoload:true
+});
+
 module.exports = app => {
 
     app.get('/users', (req, res) => {
@@ -14,10 +21,23 @@ module.exports = app => {
         });
     });
 
-    //  /users/admin
+
     app.post('/users', (req, res) => {
 
-        //exibir campos
-        res.json(req.body);
+        //salva no banco
+        //recebe objeto json e funcao com erro e registro salvo
+        db.insert(req.body, (err, user)=>{
+
+            if(err){
+                //template string
+                console.log('error: ${err}');
+                //resposta para servidor
+                res.status(400).json({
+                    error: err
+                });
+            } else{
+                res.status(200).json(user);
+            }
+        });
     });
 };
