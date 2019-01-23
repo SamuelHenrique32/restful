@@ -9,16 +9,26 @@ module.exports = app => {
 
     app.get('/users', (req, res) => {
 
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json({                                          //express permite tirar stringfy
+        //nao busca ninguem especifico, tras todos
+        //ordena por nome ascendente, decrescente e -1
+        db.find({}).sort({name:1}).exec((err, users)=>{
 
-            users:[{
-                name:'Hcode',
-                email:'contato@hcode.com.br',
-                id:1
-            }]
+            if(err){
+                //template string
+                console.log('error: ${err}');
+                //resposta para servidor
+                res.status(400).json({
+                    error: err
+                });
+            } else{
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'application/json');
+                res.json({                                          //express permite tirar stringfy
+                    users                                           //seria users:users mas e permitido deixar assim
+                });
+            }
         });
+
     });
 
 
