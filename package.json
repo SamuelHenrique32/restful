@@ -1,0 +1,22 @@
+{
+  "name": "restful",
+  "version": "1.0.0",
+  "description": "Estudos da Seção 4 do curso de JavaScript da Udemy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SamuelHenrique32/restful.git"
+  },
+  "author": "Samuel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SamuelHenrique32/restful/issues"
+  },
+  "homepage": "https://github.com/SamuelHenrique32/restful#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
