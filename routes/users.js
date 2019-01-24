@@ -44,4 +44,19 @@ module.exports = app => {
             }
         });
     });
+
+    let routeId = app.route('/users/:id');
+
+    //retorna usuario que possui id informado
+    routeId.get((req, res) => {
+        //.id e o nome que e passado por parametro pela url
+        db.findOne({_id:req.params.id}).exec((err, user)=>{
+
+            if(err){
+                app.utils.error.send(err, req, res);
+            } else{
+                res.status(200).json(user);
+            }
+        });
+    });
 };
