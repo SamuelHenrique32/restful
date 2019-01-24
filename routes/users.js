@@ -59,4 +59,19 @@ module.exports = app => {
             }
         });
     });
+
+    routeId.put((req, res) => {
+        //.id e o nome que e passado por parametro pela url
+        //req.body guarda dados a alterar
+        //mais um parametro de erro, funcao de callback
+        db.update({_id: req.params.id }, req.body, err => {
+
+            if(err){
+                app.utils.error.send(err, req, res);
+            } else{
+                //juntar pois senao id nao aparece
+                res.status(200).json(Object.assign(req.params, req.body));
+            }
+        });
+    });
 };
