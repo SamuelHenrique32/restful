@@ -74,4 +74,18 @@ module.exports = app => {
             }
         });
     });
+
+    routeId.delete((req, res) => {
+
+        //registro a ser excluido e opcoes (exclusao multipla)
+        db.remove({ _id: req.params.id }, {}, err => {
+
+            if(err){
+                app.utils.error.send(err, req, res);
+            } else{
+                //mostra id excluido
+                res.status(200).json(req.params);
+            }
+        });
+    });
 };
