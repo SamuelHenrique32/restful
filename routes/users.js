@@ -7,19 +7,18 @@ let db = new NeDB({             //nome, se nao existir cria
 
 module.exports = app => {
 
-    app.get('/users', (req, res) => {
+    //rota padrao
+    let route = app.route('/users');
+
+    route.get((req, res) => {
 
         //nao busca ninguem especifico, tras todos
         //ordena por nome ascendente, decrescente e -1
         db.find({}).sort({name:1}).exec((err, users)=>{
 
             if(err){
-                //template string
-                console.log('error: ${err}');
-                //resposta para servidor
-                res.status(400).json({
-                    error: err
-                });
+                //send e modulo
+                app.utils.error.send(err, req, res);
             } else{
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');
@@ -32,19 +31,14 @@ module.exports = app => {
     });
 
 
-    app.post('/users', (req, res) => {
+    route.post((req, res) => {
 
         //salva no banco
         //recebe objeto json e funcao com erro e registro salvo
         db.insert(req.body, (err, user)=>{
 
             if(err){
-                //template string
-                console.log('error: ${err}');
-                //resposta para servidor
-                res.status(400).json({
-                    error: err
-                });
+                app.utils.error.send(err, req, res);
             } else{
                 res.status(200).json(user);
             }

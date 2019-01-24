@@ -8,7 +8,9 @@ app.use(bodyParser.urlencoded({ extended: false}));
 
 app.use(bodyParser.json());                             //dados que receber via post converte para json
 
-consign().include('routes').into(app);                  //inclui todas as rotas no app
+//inclui todas as rotas no app
+//inclui agora tambem o utils
+consign().include('routes').include('utils').into(app);
 
 //porta 3000
 app.listen(3000, '127.0.0.1', ()=>{
