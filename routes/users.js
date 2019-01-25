@@ -33,6 +33,8 @@ module.exports = app => {
 
     route.post((req, res) => {
 
+        if(!app.utils.validator.user(app, req, res)) return false;
+
         //salva no banco
         //recebe objeto json e funcao com erro e registro salvo
         db.insert(req.body, (err, user)=>{
@@ -60,7 +62,11 @@ module.exports = app => {
         });
     });
 
+    //update
     routeId.put((req, res) => {
+
+        if(!app.utils.validator.user(app, req, res)) return false;
+
         //.id e o nome que e passado por parametro pela url
         //req.body guarda dados a alterar
         //mais um parametro de erro, funcao de callback

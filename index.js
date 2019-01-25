@@ -1,12 +1,15 @@
 const express = require('express');                     //modulo carregado
 const consign = require('consign');
 const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
 
 let app = express();
 
 app.use(bodyParser.urlencoded({ extended: false}));
 
 app.use(bodyParser.json());                             //dados que receber via post converte para json
+
+app.use(expressValidator());
 
 //inclui todas as rotas no app
 //inclui agora tambem o utils
